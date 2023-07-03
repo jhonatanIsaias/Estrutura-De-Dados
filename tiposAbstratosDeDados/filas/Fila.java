@@ -1,8 +1,8 @@
 package tiposAbstratosDeDados.filas;
 
-public abstract class Fila<Integer> {
-    abstract void enfileirar(int dado) throws Exception;
-    abstract void desenfileirar() throws Exception;
+public abstract class Fila<T> {
+    abstract void enfileirar(T dado) throws Exception;
+    abstract T desenfileirar() throws Exception;
 
 
 }

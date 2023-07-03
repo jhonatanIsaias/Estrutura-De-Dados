@@ -1,6 +1,6 @@
 package tiposAbstratosDeDados.filas;
 
-public class No {
+public class No<T> {
     private No dado;
     private No prox;
 

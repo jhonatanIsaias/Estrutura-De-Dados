@@ -1,6 +1,6 @@
 package tiposAbstratosDeDados.filas;
 
-public class FilaEncadeada extends Fila{
+public class FilaEncadeada<T> extends Fila<T>{
     private No inicio;
 
     private No fim;
@@ -12,8 +12,8 @@ public class FilaEncadeada extends Fila{
         this.aux = null;
     }
     @Override
-    void enfileirar(int dado) throws Exception {
-        No novo = new No();
+    public void enfileirar(T dado) throws Exception {
+        No<T> novo = new No();
         novo.setProx(null);
         if(this.inicio == null){
             this.inicio = novo;
@@ -26,12 +26,12 @@ public class FilaEncadeada extends Fila{
     }
 
     @Override
-    void desenfileirar() throws Exception {
+    public T desenfileirar() throws Exception {
         if(this.fim == null){
             throw new Exception("fila vazia");
         }
         this.aux = this.inicio;
         this.inicio = this.inicio.getProx();
-        this.aux = null;
+        return (T) this.aux;
     }
 }

@@ -2,34 +2,36 @@ package tiposAbstratosDeDados.filas;
 
 import tiposAbstratosDeDados.filas.Fila;
 
-public class FilaSequencialCircular extends Fila<Integer> {
+public class FilaSequencialCircular<T> extends Fila<T> {
 
-    private int[] filaSequencialCircular;
+    private T[] filaSequencialCircular;
     private int inicio;
     private int fim;
 
-   public FilaSequencialCircular(int tamanho){
-       this.filaSequencialCircular = new int[tamanho];
+   public FilaSequencialCircular(Class infoCategoria,int tamanho){
+       this.filaSequencialCircular = (T[]) java.lang.reflect.Array.newInstance(infoCategoria, tamanho);
        this.fim = this.filaSequencialCircular.length -1;
        this.inicio = this.fim;
    }
 
 
     @Override
-    public void enfileirar(int dado) throws Exception {
-       if(filaSequencialCircular[fim] != 0){
+    public void enfileirar(T dado) throws Exception {
+       if(filaSequencialCircular[fim] != null){
            throw  new Exception("fila cheia");
        }
         this.filaSequencialCircular[fim] = dado;
-        this.fim = (int)(this.fim -1 + filaSequencialCircular.length) % filaSequencialCircular.length;
+        this.fim =(this.fim -1 + filaSequencialCircular.length) % filaSequencialCircular.length;
     }
 
     @Override
-   public void desenfileirar() throws Exception {
-       if(filaSequencialCircular[inicio] == 0){
+   public T desenfileirar() throws Exception {
+       if(filaSequencialCircular[inicio] == null){
            throw new Exception("fila vazia");
        }
-        this.filaSequencialCircular[inicio] = 0;
-        this.inicio =(int) (this.inicio -1 + filaSequencialCircular.length) % filaSequencialCircular.length;
+       T aux = this.filaSequencialCircular[this.inicio];
+        this.filaSequencialCircular[inicio] = null;
+        this.inicio = (this.inicio -1 + filaSequencialCircular.length) % filaSequencialCircular.length;
+        return aux;
    }
 }
