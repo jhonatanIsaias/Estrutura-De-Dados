@@ -1,6 +1,8 @@
 package tiposAbstratosDeDados.Pilhas.PilhaSequencial;
-
+import tiposAbstratosDeDados.Pilhas.PilhaVaziaException;
+import tiposAbstratosDeDados.Pilhas.PilhaCheiaException;
 import tiposAbstratosDeDados.Pilhas.Pilha;
+import tiposAbstratosDeDados.Pilhas.PilhaCheiaException;
 
 public class PilhaSequencial<T> implements Pilha<T> {
     private T[] vetorSequencial;
@@ -10,9 +12,9 @@ public class PilhaSequencial<T> implements Pilha<T> {
         this.fim = 0;
     }
     @Override
-    public void empilhar(T elemento) throws Exception {
+    public void empilhar(T elemento) throws PilhaCheiaException {
         if(this.getQtd() == vetorSequencial.length){
-           throw new StackOverflowError("fila cheia");
+           throw new PilhaCheiaException("fila cheia");
         }
         this.vetorSequencial[fim] = elemento;
         this.fim++;
@@ -20,9 +22,9 @@ public class PilhaSequencial<T> implements Pilha<T> {
     }
 
     @Override
-    public T desempilhar() throws Exception {
+    public T desempilhar() throws PilhaVaziaException {
         if(this.estaVazia()){
-            throw new Exception("fila vazia");
+            throw new PilhaVaziaException("fila vazia");
         }
         T dado = this.getTopo();
         this.vetorSequencial[this.fim -1] = null;
@@ -31,7 +33,10 @@ public class PilhaSequencial<T> implements Pilha<T> {
     }
 
     @Override
-    public T getTopo() throws Exception {
+    public T getTopo() throws PilhaVaziaException {
+        if(this.estaVazia()){
+            throw new PilhaVaziaException("pilha vazia");
+        }
         return this.vetorSequencial[this.fim - 1];
     }
 

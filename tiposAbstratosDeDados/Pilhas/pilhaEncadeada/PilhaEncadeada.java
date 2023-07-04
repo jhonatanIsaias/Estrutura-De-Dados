@@ -13,7 +13,7 @@ public class PilhaEncadeada<T> implements Pilha<T> {
     }
     @Override
     public void empilhar(T elemento) throws PilhaCheiaException {
-        if(this.qtd > 12){
+        if(this.qtd > 10){
             throw new PilhaCheiaException("pilha cheia");
         }
         No<T> novo = new No();
@@ -37,7 +37,6 @@ public class PilhaEncadeada<T> implements Pilha<T> {
         }
 
         T dado = (T) this.topo.getDado();
-        this.topo = null;
         this.topo = this.topo.getAnt();
         qtd--;
         return dado;
@@ -49,7 +48,7 @@ public class PilhaEncadeada<T> implements Pilha<T> {
         if(this.topo == null){
             throw new PilhaVaziaException("pilha vazia");
         }
-        return (T) this.topo;
+        return  this.topo.getDado();
     }
 
     @Override

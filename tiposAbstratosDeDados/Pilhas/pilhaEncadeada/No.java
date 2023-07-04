@@ -8,7 +8,7 @@ public class No<T> {
         return ant;
     }
 
-    public void setAnt(No ant) {
+    public void setAnt(No<T> ant) {
         this.ant = ant;
     }
 
