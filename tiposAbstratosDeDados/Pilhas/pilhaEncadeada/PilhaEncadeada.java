@@ -1,45 +1,55 @@
 package tiposAbstratosDeDados.Pilhas.pilhaEncadeada;
 import tiposAbstratosDeDados.Pilhas.Pilha;
+import tiposAbstratosDeDados.Pilhas.PilhaCheiaException;
+import tiposAbstratosDeDados.Pilhas.PilhaVaziaException;
+
 public class PilhaEncadeada<T> implements Pilha<T> {
 
-    private No fim;
+    private No<T> topo;
     private int qtd;
     public PilhaEncadeada(){
-        this.fim = null;
+        this.topo = null;
         this.qtd = 0;
     }
     @Override
-    public void empilhar(T elemento) throws Exception {
+    public void empilhar(T elemento) throws PilhaCheiaException {
+        if(this.qtd > 12){
+            throw new PilhaCheiaException("pilha cheia");
+        }
         No<T> novo = new No();
         novo.setDado(elemento);
         if(this.estaVazia()){
-            novo.setProx(null);
-            this.fim = novo;
-            this.fim.setAnt(null);
+          this.topo = novo;
+          this.topo.setAnt(null);
+
         }else{
 
-            this.fim.setProx(novo);
-            novo.setAnt(this.fim);
-            this.fim = novo;
+          novo.setAnt(this.topo);
+          this.topo = novo;
         }
         qtd++;
     }
 
     @Override
-    public T desempilhar() throws Exception {
+    public T desempilhar() throws PilhaVaziaException {
         if(this.estaVazia()){
-            throw new Exception("fila vazia");
+            throw new PilhaVaziaException("fila vazia");
         }
 
-        T dado = (T) this.fim.getDado();
-        this.fim.getAnt().setProx(null);
-        this.fim = this.fim.getAnt();
+        T dado = (T) this.topo.getDado();
+        this.topo = null;
+        this.topo = this.topo.getAnt();
+        qtd--;
         return dado;
+
     }
 
     @Override
-    public T getTopo() throws Exception {
-        return (T) this.fim;
+    public T getTopo() throws PilhaVaziaException {
+        if(this.topo == null){
+            throw new PilhaVaziaException("pilha vazia");
+        }
+        return (T) this.topo;
     }
 
     @Override
@@ -49,7 +59,7 @@ public class PilhaEncadeada<T> implements Pilha<T> {
 
     @Override
     public boolean estaVazia() {
-        if(this.fim == null){
+        if(this.topo == null){
             return true;
         }
         return false;

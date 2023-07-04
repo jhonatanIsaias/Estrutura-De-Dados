@@ -1,8 +1,8 @@
 package tiposAbstratosDeDados.Pilhas.pilhaEncadeada;
 
-public class No<T>{
-    private No dado;
-    private No prox;
+public class No<T> {
+    private T dado;
+    private No<T> ant;
 
     public No getAnt() {
         return ant;
@@ -12,21 +12,12 @@ public class No<T>{
         this.ant = ant;
     }
 
-    private No ant;
-
-    public No getDado() {
+    public T getDado() {
         return dado;
     }
 
     public void setDado(T dado) {
-        this.dado = (No) dado;
-    }
-
-    public No getProx() {
-        return prox;
-    }
-
-    public void setProx(No prox) {
-        this.prox = prox;
+        this.dado =  dado;
     }
 }
+
