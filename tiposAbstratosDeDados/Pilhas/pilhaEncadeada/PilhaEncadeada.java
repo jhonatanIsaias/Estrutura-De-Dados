@@ -13,7 +13,7 @@ public class PilhaEncadeada<T> implements Pilha<T> {
     }
     @Override
     public void empilhar(T elemento) throws PilhaCheiaException {
-        if(this.qtd > 10){
+        if(this.qtd > 0){
             throw new PilhaCheiaException("pilha cheia");
         }
         No<T> novo = new No();
