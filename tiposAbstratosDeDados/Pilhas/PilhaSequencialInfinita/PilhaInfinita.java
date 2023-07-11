@@ -17,7 +17,7 @@ public class PilhaInfinita<T> implements Pilha<T> {
     public void empilhar(T elemento) throws PilhaCheiaException {
 
         if(this.getQtd() == vetorSequencial.length - 1){
-            this.aumentarPilha();
+            this.aumentarPilha(this.vetorSequencial.length);
         }
         this.vetorSequencial[fim] = elemento;
         this.fim++;
@@ -49,13 +49,16 @@ public class PilhaInfinita<T> implements Pilha<T> {
 
     @Override
     public boolean estaVazia() {
-        if(vetorSequencial[0] == null){
+        if(this.vetorSequencial[0] == null){
             return true;
         }
         return false;
     }
 
-    protected void aumentarPilha(){
-        this.vetorSequencial = Arrays.copyOf(this.vetorSequencial,(2*this.vetorSequencial.length));
+    private void aumentarPilha(int capacidade){
+        this.vetorSequencial = Arrays.copyOf(this.vetorSequencial,(2*capacidade));
+       //System.arraycopy(this.vetorSequencial,0,this.vetorSequencial,0,2*this.vetorSequencial.length);
+
+
     }
 }
