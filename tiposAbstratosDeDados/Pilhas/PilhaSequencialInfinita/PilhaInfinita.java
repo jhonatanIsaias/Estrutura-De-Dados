@@ -55,7 +55,7 @@ public class PilhaInfinita<T> implements Pilha<T> {
         return false;
     }
 
-    public void aumentarPilha(){
+    protected void aumentarPilha(){
         this.vetorSequencial = Arrays.copyOf(this.vetorSequencial,(2*this.vetorSequencial.length));
     }
 }
