@@ -1,24 +1,26 @@
-package tiposAbstratosDeDados.Pilhas.PilhaSequencial;
-import tiposAbstratosDeDados.Pilhas.PilhaVaziaException;
-import tiposAbstratosDeDados.Pilhas.PilhaCheiaException;
+package tiposAbstratosDeDados.Pilhas.PilhaSequencialInfinita;
+
+import java.util.Arrays;
 import tiposAbstratosDeDados.Pilhas.Pilha;
 import tiposAbstratosDeDados.Pilhas.PilhaCheiaException;
+import tiposAbstratosDeDados.Pilhas.PilhaVaziaException;
 
-public class PilhaSequencial<T> implements Pilha<T> {
+public class PilhaInfinita<T> implements Pilha<T> {
+
     private T[] vetorSequencial;
     private int fim;
-    public PilhaSequencial(Class<T> infoCategoria, int tamanho){
+    public PilhaInfinita(Class<T> infoCategoria, int tamanho){
         this.vetorSequencial = (T[]) java.lang.reflect.Array.newInstance(infoCategoria, tamanho);
         this.fim = 0;
     }
     @Override
     public void empilhar(T elemento) throws PilhaCheiaException {
+
         if(this.getQtd() == vetorSequencial.length - 1){
-           throw new PilhaCheiaException("fila cheia");
+            this.aumentarPilha();
         }
         this.vetorSequencial[fim] = elemento;
         this.fim++;
-
     }
 
     @Override
@@ -42,7 +44,7 @@ public class PilhaSequencial<T> implements Pilha<T> {
 
     @Override
     public int getQtd() {
-        return this.fim -1;
+        return this.fim - 1 ;
     }
 
     @Override
@@ -51,5 +53,9 @@ public class PilhaSequencial<T> implements Pilha<T> {
             return true;
         }
         return false;
+    }
+
+    public void aumentarPilha(){
+        this.vetorSequencial = Arrays.copyOf(this.vetorSequencial,(2*this.vetorSequencial.length));
     }
 }
